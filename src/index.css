@@ -93,3 +93,23 @@ body, html {
 #scene-ocean {
   color: #ccfbf1;
 }
+
+/* === Mobile Responsiveness === */
+@media (max-width: 768px) {
+  .section {
+    padding: 2rem 5%;
+    align-items: center; /* Center everything on mobile */
+    text-align: center;
+  }
+
+  .section h1, .section h2 {
+    font-size: 2.5rem;
+    max-width: 100%;
+  }
+
+  .section p {
+    font-size: 1.1rem;
+    max-width: 90%;
+    padding: 1rem 1.25rem;
+  }
+}

@@ -57,8 +57,13 @@ function App() {
   return (
     <>
       <div className="canvas-container">
-        {/* gl={{ antialias: true, alpha: false }} for optimized drawing */}
-        <Canvas gl={{ antialias: true }} dpr={[1, 2]}>
+        {/* dpr={[1, 1.5]} limits the maximum pixel ratio to 1.5 instead of 2 or 3 (like on modern iPhones), 
+            saving massive amounts of mobile GPU compute. performance={min: 0.5} allows R3F to drop quality further if lagging. */}
+        <Canvas 
+            gl={{ antialias: false, powerPreference: "high-performance" }} 
+            dpr={[1, 1.5]}
+            performance={{ min: 0.5 }}
+        >
           <color attach="background" args={['#050510']} />
           <Suspense fallback={null}>
             <Scene scrollProgress={scrollProgressRef} />

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Droplet } from './Droplet';
 import { CloudScene } from './CloudScene';
@@ -8,8 +8,11 @@ import { RiverScene } from './RiverScene';
 import { DeepOceanScene } from './DeepOceanScene';
 
 export function Scene({ scrollProgress }) {
-  const cameraGroupRef = useRef();
   const dropletGroupRef = useRef();
+  
+  // Get viewport to adjust for mobile screens
+  const { viewport } = useThree();
+  const isMobile = viewport.width < 5;
 
   // Scene references for fading/moving
   const cloudRef = useRef();
@@ -101,8 +104,8 @@ export function Scene({ scrollProgress }) {
   return (
     <>
       {/* The main subject tracking with the camera loosely */}
-      {/* Move the Droplet to the right (+2) so it doesn't clash with the centered text */}
-      <group ref={dropletGroupRef} position={[2, 0, 0]}>
+      {/* Move the Droplet to the right (+2) on desktop, but bring it closer on mobile (+1) so it fits */}
+      <group ref={dropletGroupRef} position={[isMobile ? 1 : 2, 0, 0]}>
          <Droplet />
       </group>
 
