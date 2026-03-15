@@ -19,17 +19,16 @@ export function Droplet(props) {
   return (
     <group {...props}>
       <mesh ref={meshRef}>
-        <sphereGeometry args={[1, 64, 64]} />
-        {/* We use MeshTransmissionMaterial from Drei for advanced glass/water refraction */}
+        {/* Halved polygon count for huge mobile performance gain */}
+        <sphereGeometry args={[1, 32, 32]} />
         <MeshTransmissionMaterial 
-          backside
-          samples={4}
+          samples={2} // Reduced from 4
           thickness={0.5}
           roughness={0}
-          clearcoat={1}
+          clearcoat={0.5} // Lowered slightly
           clearcoatRoughness={0}
           transmission={1}
-          ior={1.33} // Index of Refraction for water
+          ior={1.33}
           chromaticAberration={0.05}
           anisotropy={0.1}
           distortion={0.3}

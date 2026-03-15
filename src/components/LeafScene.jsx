@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
-import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 export function LeafScene(props) {
   // We'll create a deformed plane to act as a massive stylized leaf
   const geometry = useMemo(() => {
-    const geo = new THREE.PlaneGeometry(10, 15, 32, 32);
+    const geo = new THREE.PlaneGeometry(10, 15, 16, 16);
     geo.rotateX(-Math.PI * 0.4); // Lay it somewhat flat
     
     // Deform the vertices to make a curved leaf shape
@@ -30,7 +29,8 @@ export function LeafScene(props) {
   return (
     <group {...props}>
       <ambientLight intensity={0.4} color="#aaddaa" />
-      <directionalLight position={[0, 10, -5]} intensity={2} color="#ccffcc" castShadow />
+      {/* Shadows disabled for mobile performance gain */}
+      <directionalLight position={[0, 10, -5]} intensity={2} color="#ccffcc" />
       
       <mesh geometry={geometry} position={[2, 0, 0]} rotation={[0, 0, -0.2]}>
         <meshStandardMaterial 
@@ -41,7 +41,7 @@ export function LeafScene(props) {
         
         {/* The central vein of the leaf */}
         <mesh position={[0, 0, -0.1]}>
-          <cylinderGeometry args={[0.1, 0.2, 15, 8]} />
+          <cylinderGeometry args={[0.1, 0.2, 15, 4]} />
           <meshStandardMaterial color="#14532d" fallback={null} />
         </mesh>
       </mesh>

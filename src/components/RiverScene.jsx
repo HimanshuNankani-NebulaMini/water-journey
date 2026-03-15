@@ -1,12 +1,12 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 export function RiverScene(props) {
-  const count = 500;
+  const count = 150; // Dropped drastically for stable mobile FPS
   
-  // Create an array of particle positions and speeds
-  const particles = useMemo(() => {
+  // Use lazy useState to ensure random initialization only happens once, fixing useMemo purity warnings
+  const [particles] = useState(() => {
     const temp = [];
     for (let i = 0; i < count; i++) {
       temp.push({
@@ -17,7 +17,7 @@ export function RiverScene(props) {
       });
     }
     return temp;
-  }, [count]);
+  });
 
   const streamRef = useRef();
 

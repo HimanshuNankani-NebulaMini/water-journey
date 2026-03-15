@@ -1,11 +1,12 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 export function DeepOceanScene(props) {
-  const count = 300;
+  const count = 100; // Lowered for mobile GPU
   
-  const particles = useMemo(() => {
+  // Use lazy useState to ensure random initialization only happens once
+  const [particles] = useState(() => {
     const temp = [];
     for (let i = 0; i < count; i++) {
       temp.push({
@@ -18,7 +19,7 @@ export function DeepOceanScene(props) {
       });
     }
     return temp;
-  }, [count]);
+  });
 
   const pointsRef = useRef();
   const timeRef = useRef(0);
