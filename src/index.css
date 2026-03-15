@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: transparent; /* Let the R3F Canvas handle the back layer color */
+  color: #ffffff;
+  overflow-x: hidden;
+  overscroll-behavior: none; /* Prevent bounce padding on scroll */
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* Background Canvas Layer */
+.canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0; /* Sit above the body but behind the text */
+  pointer-events: none; /* Let clicks pass through if needed */
+}
+
+/* The scrollable overlay structure */
+.scroll-container {
+  position: relative;
+  width: 100%;
+  z-index: 10; /* FIX: keep text layers above the canvas */
+}
+
+.section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* Move text to the left half of the screen */
+  align-items: flex-start;
+  text-align: left;
+  padding: 4rem 10%;
+}
+
+.section h1, .section h2 {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  max-width: 50%;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  opacity: 0; /* Hidden by default, GSAP will animate this */
+}
+
+.section p {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: #d1d5db; /* Tailwind gray-300 equivalent */
+  max-width: 600px;
+  line-height: 1.6;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  
+  /* Glassmorphism panel for readability */
+  background: rgba(5, 5, 20, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 1.5rem 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Specific section overrides */
+#scene-start {
+  color: #e0f2fe;
+}
+#scene-leaf {
+  color: #ecfdf5;
+}
+#scene-river {
+  color: #dbeafe;
+}
+#scene-ocean {
+  color: #ccfbf1;
+}
